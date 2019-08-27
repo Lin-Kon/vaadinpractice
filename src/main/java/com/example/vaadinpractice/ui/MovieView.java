@@ -22,7 +22,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 @Route("movie")
-@Theme(value = Lumo.class)
+//@Theme(value = Lumo.class)
 public class MovieView extends VerticalLayout {
 //    private MovieService movieService;
     private Binder<Movie> movieBinder;
