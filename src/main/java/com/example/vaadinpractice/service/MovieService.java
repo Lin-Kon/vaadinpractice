@@ -15,14 +15,14 @@ import java.util.Map;
 
 @Service
 public class MovieService {
-    private MovieRepository movieRepository;
+//    private MovieRepository movieRepository;
     @Value("${baseUrl}/movies")
     private String baseUrl;
 
-    public MovieService(MovieRepository movieRepository){
-        this.movieRepository = movieRepository;
-        System.out.println("Base URL: "+baseUrl);
-    }
+//    public MovieService(MovieRepository movieRepository){
+//        this.movieRepository = movieRepository;
+//        System.out.println("Base URL: "+baseUrl);
+//    }
 
     public List<Movie> findAll() {
         System.out.println("find Base URL: "+ baseUrl);

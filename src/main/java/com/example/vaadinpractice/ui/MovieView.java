@@ -24,14 +24,14 @@ import java.util.Locale;
 @Route("movie")
 //@Theme(value = Lumo.class)
 public class MovieView extends VerticalLayout {
-//    private MovieService movieService;
+    private MovieService movieService;
     private Binder<Movie> movieBinder;
     private Grid<Movie> movieGrid;
 
-//    public MovieView(MovieService movieService)
-    public MovieView()
+    public MovieView(MovieService movieService)
+//    public MovieView()
     {
-//        this.movieService = movieService;
+        this.movieService = movieService;
 
         movieBinder = new Binder<>();
 
@@ -82,36 +82,36 @@ public class MovieView extends VerticalLayout {
                 .addComponentColumn(movie -> getDeleteColumn(movie))
                 .setWidth("50px")
                 .setFlexGrow(0);
-//        movieGrid.setItems(movieService.findAll());
+        movieGrid.setItems(movieService.findAll());
         movieGrid.setItems(new Movie(1000, "The American Virgin"));
 
         add(formLayout, movieGrid);
 
-//        submitButton.addClickListener(event -> {
-//            Movie movie = new Movie();
-//            try{
-//                movieBinder.writeBean(movie);
-//                Notification.show(movie.toString());
-//                Movie savedMovie = movieService.save(movie);
-//                movieGrid.setItems(movieService.findAll());
-//                Notification.show("Saved "+savedMovie.getTitle());
-//            } catch (Exception e){
-//                Notification.show(e.getMessage());
-//            }
-//        });
-//
-//        updateButton.addClickListener(event -> {
-//            Movie movie = new Movie();
-//            try {
-//                movieBinder.writeBean(movie);
-//                Notification.show(movie.toString());
-//                Movie updatedMovie = movieService.update(movie);
-//                movieGrid.setItems(movieService.findAll());
-//                Notification.show("Updated " + updatedMovie.getTitle());
-//            } catch (Exception e){
-//                Notification.show(e.getMessage());
-//            }
-//        });
+        submitButton.addClickListener(event -> {
+            Movie movie = new Movie();
+            try{
+                movieBinder.writeBean(movie);
+                Notification.show(movie.toString());
+                Movie savedMovie = movieService.save(movie);
+                movieGrid.setItems(movieService.findAll());
+                Notification.show("Saved "+savedMovie.getTitle());
+            } catch (Exception e){
+                Notification.show(e.getMessage());
+            }
+        });
+
+        updateButton.addClickListener(event -> {
+            Movie movie = new Movie();
+            try {
+                movieBinder.writeBean(movie);
+                Notification.show(movie.toString());
+                Movie updatedMovie = movieService.update(movie);
+                movieGrid.setItems(movieService.findAll());
+                Notification.show("Updated " + updatedMovie.getTitle());
+            } catch (Exception e){
+                Notification.show(e.getMessage());
+            }
+        });
     }
 
     private Component getEditColumn(Movie movie) {
@@ -137,10 +137,10 @@ public class MovieView extends VerticalLayout {
         Button button = new Button();
         button.setIcon(VaadinIcon.FILE_REMOVE.create());
         button.getElement().setProperty("title", "This is a delete button");
-//        button.addClickListener(event -> {
-//            movieService.delete(movie);
-//            movieGrid.setItems(movieService.findAll());
-//        });
+        button.addClickListener(event -> {
+            movieService.delete(movie);
+            movieGrid.setItems(movieService.findAll());
+        });
         return button;
     }
 }
