@@ -4,11 +4,11 @@ import com.example.vaadinpractice.model.Movie;
 import com.example.vaadinpractice.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,16 +42,27 @@ public class MovieService {
         return savedMovie;
     }
 
-    public Movie update(Movie movie) {
-        return movie;
-    }
+//    public Movie update(Movie movie)    {
+//        RestTemplate restTemplate = new RestTemplate();
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//        HttpEntity<Movie> entity = new HttpEntity<Movie>(movie,headers);
+//        ResponseEntity<Movie> response = restTemplate.exchange(baseUrl+"/"+movie.getId(), HttpMethod.PUT, entity, Movie.class);
+//        Movie updatedMovie = response.getBody();
+//        return updatedMovie;
+//    }
 
     public String delete(Movie movie) {
-        Map<String, String> params = new HashMap();
-        params.put("id","2");
-
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(baseUrl + "/" + movie.getId(), params);
+//        Map<String, String> params = new HashMap();
+//        params.put("id","2");
+//        restTemplate.delete(baseUrl + "/" + movie.getId(), params);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity<Movie> entity = new HttpEntity<Movie>(movie,headers);
+        restTemplate.exchange(baseUrl+"/", HttpMethod.DELETE, entity, Movie.class);
+//        Movie deletedMovie = response.getBody();
         return null;
     }
 }

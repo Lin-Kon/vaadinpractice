@@ -22,7 +22,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 @Route("movie")
-//@Theme(value = Lumo.class)
+@Theme(value = Lumo.class)
 public class MovieView extends VerticalLayout {
     private MovieService movieService;
     private Binder<Movie> movieBinder;
@@ -37,7 +37,7 @@ public class MovieView extends VerticalLayout {
 
         TextField idField = new TextField("Movie ID");
         TextField titleField = new TextField("Movie Title");
-        Button submitButton = new Button("Sumbit");
+        Button submitButton = new Button("Submit");
         Button updateButton = new Button("Update");
 
         FormLayout formLayout = new FormLayout();
@@ -83,7 +83,7 @@ public class MovieView extends VerticalLayout {
                 .setWidth("50px")
                 .setFlexGrow(0);
         movieGrid.setItems(movieService.findAll());
-        movieGrid.setItems(new Movie(1000, "The American Virgin"));
+//        movieGrid.setItems(new Movie(1000, "The American Virgin"));
 
         add(formLayout, movieGrid);
 
@@ -100,18 +100,18 @@ public class MovieView extends VerticalLayout {
             }
         });
 
-        updateButton.addClickListener(event -> {
-            Movie movie = new Movie();
-            try {
-                movieBinder.writeBean(movie);
-                Notification.show(movie.toString());
-                Movie updatedMovie = movieService.update(movie);
-                movieGrid.setItems(movieService.findAll());
-                Notification.show("Updated " + updatedMovie.getTitle());
-            } catch (Exception e){
-                Notification.show(e.getMessage());
-            }
-        });
+//        updateButton.addClickListener(event -> {
+//            Movie movie = new Movie();
+//            try {
+//                movieBinder.writeBean(movie);
+//                Notification.show(movie.toString());
+//                Movie updatedMovie = movieService.update(movie);
+//                movieGrid.setItems(movieService.findAll());
+//                Notification.show("Updated " + updatedMovie.getTitle());
+//            } catch (Exception e){
+//                Notification.show(e.getMessage());
+//            }
+//        });
     }
 
     private Component getEditColumn(Movie movie) {
